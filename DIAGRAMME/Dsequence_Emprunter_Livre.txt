@@ -1,0 +1,40 @@
+@startuml
+
+actor Utilisateur
+
+boundary "JSP" as View
+control "EmpruntServlet" as Controller
+control "EmpruntService" as Service
+entity "LivreRepository" as LivreRepo
+entity "EmpruntRepository" as EmpruntRepo
+database PostgreSQL
+
+Utilisateur -> View : Clique sur "Emprunter"
+
+View -> Controller : POST /emprunts
+
+Controller -> Service : emprunter(livreId, utilisateurId)
+
+Service -> LivreRepo : estDisponible(livreId)
+
+LivreRepo -> PostgreSQL : SELECT livre
+
+PostgreSQL --> LivreRepo : Disponible
+
+LivreRepo --> Service : true
+
+Service -> EmpruntRepo : save(emprunt)
+
+EmpruntRepo -> PostgreSQL : INSERT emprunt
+
+PostgreSQL --> EmpruntRepo : OK
+
+EmpruntRepo --> Service
+
+Service --> Controller : Succès
+
+Controller --> View : Redirection liste des emprunts
+
+View --> Utilisateur : Emprunt enregistré
+
+@enduml

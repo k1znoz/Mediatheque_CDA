@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+
+actor "Utilisateur" as User
+
+rectangle "Application Médiathèque" {
+
+    usecase "Rechercher un livre" as UC1
+    usecase "Consulter les détails d'un livre" as UC2
+    usecase "Emprunter un livre" as UC3
+    usecase "Vérifier la disponibilité" as UC4
+    usecase "Enregistrer l'emprunt" as UC5
+
+    UC3 --> UC4 : <<include>>
+    UC3 --> UC5 : <<include>>
+}
+
+User --> UC1
+User --> UC2
+User --> UC3
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+
+entity livre {
+    * id : BIGSERIAL
+    --
+    titre : VARCHAR
+    isbn : VARCHAR
+    date_publication : DATE
+    editeur_id : BIGINT
+    categorie_id : BIGINT
+}
+
+entity auteur {
+    * id : BIGSERIAL
+    --
+    nom : VARCHAR
+    prenom : VARCHAR
+}
+
+entity livre_auteur {
+    * livre_id : BIGINT
+    * auteur_id : BIGINT
+}
+
+entity editeur {
+    * id : BIGSERIAL
+    --
+    nom : VARCHAR
+}
+
+entity categorie {
+    * id : BIGSERIAL
+    --
+    nom : VARCHAR
+}
+
+entity utilisateur {
+    * id : BIGSERIAL
+    --
+    nom : VARCHAR
+    prenom : VARCHAR
+    email : VARCHAR
+}
+
+entity emprunt {
+    * id : BIGSERIAL
+    --
+    livre_id : BIGINT
+    utilisateur_id : BIGINT
+    date_emprunt : DATE
+    date_retour_prevue : DATE
+    date_retour_effective : DATE
+}
+
+livre }o--|| editeur
+
+livre }o--|| categorie
+
+livre ||--o{ livre_auteur
+
+auteur ||--o{ livre_auteur
+
+utilisateur ||--o{ emprunt
+
+livre ||--o{ emprunt
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+
+class Livre {
+    - id : Long
+    - titre : String
+    - isbn : String
+    - datePublication : LocalDate
+}
+
+class Auteur {
+    - id : Long
+    - nom : String
+    - prenom : String
+}
+
+class Editeur {
+    - id : Long
+    - nom : String
+}
+
+class Categorie {
+    - id : Long
+    - nom : String
+}
+
+class Utilisateur {
+    - id : Long
+    - nom : String
+    - prenom : String
+    - email : String
+}
+
+class Emprunt {
+    - id : Long
+    - dateEmprunt : LocalDate
+    - dateRetourPrevue : LocalDate
+    - dateRetourEffective : LocalDate
+}
+
+Livre "0..*" -- "1" Editeur
+
+Livre "0..*" -- "1" Categorie
+
+Livre "*" -- "*" Auteur
+
+Utilisateur "1" -- "0..*" Emprunt
+
+Livre "1" -- "0..*" Emprunt
+
+@enduml

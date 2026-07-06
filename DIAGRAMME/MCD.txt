@@ -1,0 +1,56 @@
+@startuml
+
+entity Livre {
+    * id : bigint
+    --
+    titre : varchar
+    isbn : varchar
+    datePublication : date
+}
+
+entity Auteur {
+    * id : bigint
+    --
+    nom : varchar
+    prenom : varchar
+}
+
+entity Editeur {
+    * id : bigint
+    --
+    nom : varchar
+}
+
+entity Categorie {
+    * id : bigint
+    --
+    nom : varchar
+}
+
+entity Utilisateur {
+    * id : bigint
+    --
+    nom : varchar
+    prenom : varchar
+    email : varchar
+}
+
+entity Emprunt {
+    * id : bigint
+    --
+    dateEmprunt : date
+    dateRetourPrevue : date
+    dateRetourEffective : date
+}
+
+Livre }o--|| Editeur
+
+Livre }o--|| Categorie
+
+Livre }o--o{ Auteur
+
+Utilisateur ||--o{ Emprunt
+
+Livre ||--o{ Emprunt
+
+@enduml
