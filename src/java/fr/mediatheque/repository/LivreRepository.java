@@ -8,26 +8,26 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 /**
- * Repository JPA pour l'entité Categorie.
+ * Repository JPA pour l'entité Livre.
  * Cette classe gère uniquement l'accès à la base de données.
  */
 public class LivreRepository {
 
-    public void save(Livre categorie) {
+    public void save(Livre livre) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour insérer la catégorie.
+            // Début de transaction pour insérer le livre.
             transaction.begin();
-            em.persist(categorie);
+            em.persist(livre);
             transaction.commit();
         } catch (Exception e) {
             // En cas d'erreur, on annule la transaction.
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de l'insertion de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de l'insertion du livre.", e);
         } finally {
             // Toujours fermer l'EntityManager.
             em.close();
@@ -55,21 +55,21 @@ public class LivreRepository {
         }
     }
 
-    public Livre update(Livre categorie) {
+    public Livre update(Livre livre) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour modifier la catégorie.
+            // Début de transaction pour modifier le livre.
             transaction.begin();
-            Livre categorieMaj = em.merge(categorie);
+            Livre livreMaj = em.merge(livre);
             transaction.commit();
-            return categorieMaj;
+            return livreMaj;
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la mise à jour de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la mise à jour du livre.", e);
         } finally {
             em.close();
         }
@@ -80,12 +80,12 @@ public class LivreRepository {
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour supprimer la catégorie.
+            // Début de transaction pour supprimer le livre.
             transaction.begin();
-            Livre categorie = em.find(Livre.class, id);
+            Livre livre = em.find(Livre.class, id);
 
-            if (categorie != null) {
-                em.remove(categorie);
+            if (livre != null) {
+                em.remove(livre);
             }
 
             transaction.commit();
@@ -93,7 +93,7 @@ public class LivreRepository {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la suppression de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la suppression du livre.", e);
         } finally {
             em.close();
         }

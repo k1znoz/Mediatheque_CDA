@@ -35,6 +35,11 @@
     </p>
 
     <p>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" value="${auteur.prenom}" required>
+    </p>
+
+    <p>
         <button type="submit">Enregistrer</button>
     </p>
 </form>

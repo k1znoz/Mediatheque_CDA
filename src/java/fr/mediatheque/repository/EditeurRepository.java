@@ -8,26 +8,26 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 /**
- * Repository JPA pour l'entité Categorie.
+ * Repository JPA pour l'entité Editeur.
  * Cette classe gère uniquement l'accès à la base de données.
  */
 public class EditeurRepository {
 
-    public void save(Editeur categorie) {
+    public void save(Editeur editeur) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour insérer la catégorie.
+            // Début de transaction pour insérer l'éditeur.
             transaction.begin();
-            em.persist(categorie);
+            em.persist(editeur);
             transaction.commit();
         } catch (Exception e) {
             // En cas d'erreur, on annule la transaction.
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de l'insertion de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de l'insertion de l'éditeur.", e);
         } finally {
             // Toujours fermer l'EntityManager.
             em.close();
@@ -48,28 +48,28 @@ public class EditeurRepository {
         EntityManager em = JpaUtil.createEntityManager();
 
         try {
-            return em.createQuery("SELECT c FROM Editeur c", Editeur.class)
+            return em.createQuery("SELECT e FROM Editeur e", Editeur.class)
                     .getResultList();
         } finally {
             em.close();
         }
     }
 
-    public Editeur update(Editeur categorie) {
+    public Editeur update(Editeur editeur) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour modifier la catégorie.
+            // Début de transaction pour modifier l'éditeur.
             transaction.begin();
-            Editeur categorieMaj = em.merge(categorie);
+            Editeur editeurMaj = em.merge(editeur);
             transaction.commit();
-            return categorieMaj;
+            return editeurMaj;
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la mise à jour de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la mise à jour de l'éditeur.", e);
         } finally {
             em.close();
         }
@@ -80,12 +80,12 @@ public class EditeurRepository {
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour supprimer la catégorie.
+            // Début de transaction pour supprimer l'éditeur.
             transaction.begin();
-            Editeur categorie = em.find(Editeur.class, id);
+            Editeur editeur = em.find(Editeur.class, id);
 
-            if (categorie != null) {
-                em.remove(categorie);
+            if (editeur != null) {
+                em.remove(editeur);
             }
 
             transaction.commit();
@@ -93,7 +93,7 @@ public class EditeurRepository {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la suppression de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la suppression de l'éditeur.", e);
         } finally {
             em.close();
         }

@@ -35,6 +35,16 @@
     </p>
 
     <p>
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom" value="${utilisateur.prenom}" required>
+    </p>
+
+    <p>
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" value="${utilisateur.email}" required>
+    </p>
+
+    <p>
         <button type="submit">Enregistrer</button>
     </p>
 </form>

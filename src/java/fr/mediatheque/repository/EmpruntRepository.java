@@ -8,26 +8,26 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 /**
- * Repository JPA pour l'entité Categorie.
+ * Repository JPA pour l'entité Emprunt.
  * Cette classe gère uniquement l'accès à la base de données.
  */
 public class EmpruntRepository {
 
-    public void save(Emprunt categorie) {
+    public void save(Emprunt emprunt) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour insérer la catégorie.
+            // Début de transaction pour insérer l'emprunt.
             transaction.begin();
-            em.persist(categorie);
+            em.persist(emprunt);
             transaction.commit();
         } catch (Exception e) {
             // En cas d'erreur, on annule la transaction.
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de l'insertion de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de l'insertion de l'emprunt.", e);
         } finally {
             // Toujours fermer l'EntityManager.
             em.close();
@@ -48,28 +48,28 @@ public class EmpruntRepository {
         EntityManager em = JpaUtil.createEntityManager();
 
         try {
-            return em.createQuery("SELECT c FROM Emprunt c", Emprunt.class)
+            return em.createQuery("SELECT e FROM Emprunt e", Emprunt.class)
                     .getResultList();
         } finally {
             em.close();
         }
     }
 
-    public Emprunt update(Emprunt categorie) {
+    public Emprunt update(Emprunt emprunt) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour modifier la catégorie.
+            // Début de transaction pour modifier l'emprunt.
             transaction.begin();
-            Emprunt categorieMaj = em.merge(categorie);
+            Emprunt empruntMaj = em.merge(emprunt);
             transaction.commit();
-            return categorieMaj;
+            return empruntMaj;
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la mise à jour de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la mise à jour de l'emprunt.", e);
         } finally {
             em.close();
         }
@@ -80,12 +80,12 @@ public class EmpruntRepository {
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour supprimer la catégorie.
+            // Début de transaction pour supprimer l'emprunt.
             transaction.begin();
-            Emprunt categorie = em.find(Emprunt.class, id);
+            Emprunt emprunt = em.find(Emprunt.class, id);
 
-            if (categorie != null) {
-                em.remove(categorie);
+            if (emprunt != null) {
+                em.remove(emprunt);
             }
 
             transaction.commit();
@@ -93,7 +93,7 @@ public class EmpruntRepository {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la suppression de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la suppression de l'emprunt.", e);
         } finally {
             em.close();
         }

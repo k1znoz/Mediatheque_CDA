@@ -1,6 +1,7 @@
 fr\mediatheque\service\AuteurService.class
 fr\mediatheque\repository\CategorieRepository.class
 fr\mediatheque\config\JpaUtil.class
+fr\mediatheque\controller\EmpruntServlet.class
 fr\mediatheque\model\Emprunt.class
 fr\mediatheque\repository\EditeurRepository.class
 fr\mediatheque\model\Utilisateur.class

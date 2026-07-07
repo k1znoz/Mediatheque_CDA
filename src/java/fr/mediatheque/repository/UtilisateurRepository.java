@@ -8,26 +8,26 @@ import jakarta.persistence.EntityTransaction;
 import java.util.List;
 
 /**
- * Repository JPA pour l'entité Categorie.
+ * Repository JPA pour l'entité Utilisateur.
  * Cette classe gère uniquement l'accès à la base de données.
  */
 public class UtilisateurRepository {
 
-    public void save(Utilisateur categorie) {
+    public void save(Utilisateur utilisateur) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour insérer la catégorie.
+            // Début de transaction pour insérer l'utilisateur.
             transaction.begin();
-            em.persist(categorie);
+            em.persist(utilisateur);
             transaction.commit();
         } catch (Exception e) {
             // En cas d'erreur, on annule la transaction.
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de l'insertion de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de l'insertion de l'utilisateur.", e);
         } finally {
             // Toujours fermer l'EntityManager.
             em.close();
@@ -55,21 +55,21 @@ public class UtilisateurRepository {
         }
     }
 
-    public Utilisateur update(Utilisateur categorie) {
+    public Utilisateur update(Utilisateur utilisateur) {
         EntityManager em = JpaUtil.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour modifier la catégorie.
+            // Début de transaction pour modifier l'utilisateur.
             transaction.begin();
-            Utilisateur categorieMaj = em.merge(categorie);
+            Utilisateur utilisateurMaj = em.merge(utilisateur);
             transaction.commit();
-            return categorieMaj;
+            return utilisateurMaj;
         } catch (Exception e) {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la mise à jour de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la mise à jour de l'utilisateur.", e);
         } finally {
             em.close();
         }
@@ -80,12 +80,12 @@ public class UtilisateurRepository {
         EntityTransaction transaction = em.getTransaction();
 
         try {
-            // Début de transaction pour supprimer la catégorie.
+            // Début de transaction pour supprimer l'utilisateur.
             transaction.begin();
-            Utilisateur categorie = em.find(Utilisateur.class, id);
+            Utilisateur utilisateur = em.find(Utilisateur.class, id);
 
-            if (categorie != null) {
-                em.remove(categorie);
+            if (utilisateur != null) {
+                em.remove(utilisateur);
             }
 
             transaction.commit();
@@ -93,7 +93,7 @@ public class UtilisateurRepository {
             if (transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Erreur lors de la suppression de la catégorie.", e);
+            throw new RuntimeException("Erreur lors de la suppression de l'utilisateur.", e);
         } finally {
             em.close();
         }
