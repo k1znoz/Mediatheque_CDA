@@ -29,11 +29,11 @@ public class EditeurServlet extends HttpServlet {
                 // Affiche la liste des éditeurs.
                 List<Editeur> editeurs = editeurService.findAll();
                 request.setAttribute("editeurs", editeurs);
-                request.getRequestDispatcher("/jsp/editeur/liste.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/editeurs/liste.jsp").forward(request, response);
                 break;
             case "new":
                 // Affiche le formulaire vide.
-                request.getRequestDispatcher("/jsp/editeur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/editeurs/formulaire.jsp").forward(request, response);
                 break;
             case "edit":
                 // Charge l'éditeur à modifier.
@@ -42,7 +42,7 @@ public class EditeurServlet extends HttpServlet {
                     Editeur editeur = editeurService.findById(id);
                     request.setAttribute("editeur", editeur);
                 }
-                request.getRequestDispatcher("/jsp/editeur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/editeurs/formulaire.jsp").forward(request, response);
                 break;
             default:
                 // Action inconnue : retour à la liste.
@@ -56,12 +56,12 @@ public class EditeurServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("create".equals(action)) {
-            // Création d'un nouvel éditeurs.
+            // Création d'un nouvel éditeur.
             String nom = request.getParameter("nom");
             Editeur editeur = new Editeur(nom);
             editeurService.save(editeur);
         } else if ("update".equals(action)) {
-            // Modification d'un éditeurs existant.
+            // Modification d'un éditeur existant.
             Long id = parseId(request.getParameter("id"));
             String nom = request.getParameter("nom");
             if (id != null) {

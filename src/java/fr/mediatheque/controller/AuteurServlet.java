@@ -29,11 +29,11 @@ public class AuteurServlet extends HttpServlet {
                 // Affiche la liste des auteurs.
                 List<Auteur> auteurs = auteurService.findAll();
                 request.setAttribute("auteurs", auteurs);
-                request.getRequestDispatcher("/jsp/auteur/liste.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/auteurs/liste.jsp").forward(request, response);
                 break;
             case "new":
                 // Affiche le formulaire vide.
-                request.getRequestDispatcher("/jsp/auteur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/auteurs/formulaire.jsp").forward(request, response);
                 break;
             case "edit":
                 // Charge l'auteur à modifier.
@@ -42,7 +42,7 @@ public class AuteurServlet extends HttpServlet {
                     Auteur auteur = auteurService.findById(id);
                     request.setAttribute("auteur", auteur);
                 }
-                request.getRequestDispatcher("/jsp/auteur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/auteurs/formulaire.jsp").forward(request, response);
                 break;
             default:
                 // Action inconnue : retour à la liste.

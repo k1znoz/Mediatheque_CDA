@@ -29,11 +29,11 @@ public class UtilisateurServlet extends HttpServlet {
                 // Affiche la liste des utilisateurs.
                 List<Utilisateur> utilisateurs = utilisateurService.findAll();
                 request.setAttribute("utilisateurs", utilisateurs);
-                request.getRequestDispatcher("/jsp/utilisateur/liste.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/utilisateurs/liste.jsp").forward(request, response);
                 break;
             case "new":
                 // Affiche le formulaire vide.
-                request.getRequestDispatcher("/jsp/utilisateur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/utilisateurs/formulaire.jsp").forward(request, response);
                 break;
             case "edit":
                 // Charge l'utilisateur à modifier.
@@ -42,7 +42,7 @@ public class UtilisateurServlet extends HttpServlet {
                     Utilisateur utilisateur = utilisateurService.findById(id);
                     request.setAttribute("utilisateur", utilisateur);
                 }
-                request.getRequestDispatcher("/jsp/utilisateur/formulaire.jsp").forward(request, response);
+                request.getRequestDispatcher("/jsp/utilisateurs/formulaire.jsp").forward(request, response);
                 break;
             default:
                 // Action inconnue : retour à la liste.
