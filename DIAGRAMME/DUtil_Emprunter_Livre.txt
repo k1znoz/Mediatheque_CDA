@@ -1,22 +1,24 @@
 @startuml
 left to right direction
 
-actor "Utilisateur" as User
+actor Utilisateur
 
 rectangle "Application Médiathèque" {
 
-    usecase "Rechercher un livre" as UC1
-    usecase "Consulter les détails d'un livre" as UC2
-    usecase "Emprunter un livre" as UC3
-    usecase "Vérifier la disponibilité" as UC4
-    usecase "Enregistrer l'emprunt" as UC5
+    usecase "Consulter les livres" as UC1
 
-    UC3 --> UC4 : <<include>>
-    UC3 --> UC5 : <<include>>
+    usecase "Emprunter un livre" as UC2
+
+    usecase "Vérifier la disponibilité" as UC3
+
+    usecase "Enregistrer l'emprunt" as UC4
+
 }
 
-User --> UC1
-User --> UC2
-User --> UC3
+Utilisateur --> UC1
+Utilisateur --> UC2
+
+UC2 .> UC3 : <<include>>
+UC2 .> UC4 : <<include>>
 
 @enduml

@@ -1,41 +1,43 @@
 @startuml
+hide circle
+skinparam linetype ortho
 
 entity livre {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
     titre : VARCHAR
-    isbn : VARCHAR
+    isbn : VARCHAR <<UNIQUE>>
     date_publication : DATE
-    editeur_id : BIGINT
-    categorie_id : BIGINT
+    editeur_id : BIGINT <<FK>>
+    categorie_id : BIGINT <<FK>>
 }
 
 entity auteur {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
     nom : VARCHAR
     prenom : VARCHAR
 }
 
 entity livre_auteur {
-    * livre_id : BIGINT
-    * auteur_id : BIGINT
+    * livre_id : BIGINT <<PK, FK>>
+    * auteur_id : BIGINT <<PK, FK>>
 }
 
 entity editeur {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
     nom : VARCHAR
 }
 
 entity categorie {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
     nom : VARCHAR
 }
 
 entity utilisateur {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
     nom : VARCHAR
     prenom : VARCHAR
@@ -43,25 +45,26 @@ entity utilisateur {
 }
 
 entity emprunt {
-    * id : BIGSERIAL
+    * id : BIGSERIAL <<PK>>
     --
-    livre_id : BIGINT
-    utilisateur_id : BIGINT
+    livre_id : BIGINT <<FK>>
+    utilisateur_id : BIGINT <<FK>>
     date_emprunt : DATE
     date_retour_prevue : DATE
     date_retour_effective : DATE
 }
 
-livre }o--|| editeur
+'==========================
+' Relations
+'==========================
 
+livre }o--|| editeur
 livre }o--|| categorie
 
 livre ||--o{ livre_auteur
-
 auteur ||--o{ livre_auteur
 
 utilisateur ||--o{ emprunt
-
 livre ||--o{ emprunt
 
 @enduml

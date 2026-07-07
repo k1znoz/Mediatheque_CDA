@@ -2,39 +2,38 @@
 
 actor Utilisateur
 
-boundary "JSP" as View
-control "EmpruntServlet" as Controller
-control "EmpruntService" as Service
-entity "LivreRepository" as LivreRepo
-entity "EmpruntRepository" as EmpruntRepo
+boundary JSP
+
+control EmpruntServlet
+
+control EmpruntService
+
+control LivreService
+
+control UtilisateurService
+
+database EmpruntRepository
+
 database PostgreSQL
 
-Utilisateur -> View : Clique sur "Emprunter"
+Utilisateur -> JSP : Remplit le formulaire
 
-View -> Controller : POST /emprunts
+JSP -> EmpruntServlet : POST /emprunts
 
-Controller -> Service : emprunter(livreId, utilisateurId)
+EmpruntServlet -> EmpruntService : save(emprunt)
 
-Service -> LivreRepo : estDisponible(livreId)
+EmpruntService -> EmpruntRepository : persist(emprunt)
 
-LivreRepo -> PostgreSQL : SELECT livre
+EmpruntRepository -> PostgreSQL : INSERT emprunt
 
-PostgreSQL --> LivreRepo : Disponible
+PostgreSQL --> EmpruntRepository : OK
 
-LivreRepo --> Service : true
+EmpruntRepository --> EmpruntService
 
-Service -> EmpruntRepo : save(emprunt)
+EmpruntService --> EmpruntServlet
 
-EmpruntRepo -> PostgreSQL : INSERT emprunt
+EmpruntServlet --> JSP : redirect list
 
-PostgreSQL --> EmpruntRepo : OK
-
-EmpruntRepo --> Service
-
-Service --> Controller : Succès
-
-Controller --> View : Redirection liste des emprunts
-
-View --> Utilisateur : Emprunt enregistré
+JSP --> Utilisateur : Liste mise à jour
 
 @enduml

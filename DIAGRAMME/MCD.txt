@@ -1,53 +1,55 @@
 @startuml
+hide circle
+skinparam linetype ortho
 
 entity Livre {
-    * id : bigint
+    * id
     --
-    titre : varchar
-    isbn : varchar
-    datePublication : date
+    titre
+    isbn
+    datePublication
 }
 
 entity Auteur {
-    * id : bigint
+    * id
     --
-    nom : varchar
-    prenom : varchar
+    nom
+    prenom
 }
 
 entity Editeur {
-    * id : bigint
+    * id
     --
-    nom : varchar
+    nom
 }
 
 entity Categorie {
-    * id : bigint
+    * id
     --
-    nom : varchar
+    nom
 }
 
 entity Utilisateur {
-    * id : bigint
+    * id
     --
-    nom : varchar
-    prenom : varchar
-    email : varchar
+    nom
+    prenom
+    email
 }
 
 entity Emprunt {
-    * id : bigint
+    * id
     --
-    dateEmprunt : date
-    dateRetourPrevue : date
-    dateRetourEffective : date
+    dateEmprunt
+    dateRetourPrevue
+    dateRetourEffective
 }
 
-Livre }o--|| Editeur
+Auteur }o--o{ Livre
 
-Livre }o--|| Categorie
+Categorie ||--o{ Livre
 
-Livre }o--o{ Auteur
+Editeur ||--o{ Livre
 
 Utilisateur ||--o{ Emprunt
 
