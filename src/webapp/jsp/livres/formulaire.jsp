@@ -49,9 +49,14 @@
         <select id="categorieId" name="categorieId" required>
             <option value="">-- Choisir une catégorie --</option>
             <c:forEach var="categorie" items="${categories}">
-                <option value="${categorie.id}" ${livre != null && livre.categorie != null && livre.categorie.id == categorie.id ? 'selected' : ''}>
-                        ${categorie.nom}
-                </option>
+                <c:choose>
+                    <c:when test="${livre != null && livre.categorie != null && livre.categorie.id == categorie.id}">
+                        <option value="${categorie.id}" selected>${categorie.nom}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${categorie.id}">${categorie.nom}</option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select>
     </p>

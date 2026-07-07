@@ -45,6 +45,55 @@
     </p>
 
     <p>
+        <label for="categorieId">Catégorie :</label>
+        <select id="categorieId" name="categorieId" required>
+            <option value="">-- Choisir une catégorie --</option>
+            <c:forEach var="categorie" items="${categories}">
+                <c:choose>
+                    <c:when test="${livre != null && livre.categorie != null && livre.categorie.id == categorie.id}">
+                        <option value="${categorie.id}" selected>${categorie.nom}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${categorie.id}">${categorie.nom}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select>
+    </p>
+
+    <p>
+        <label for="editeurId">Éditeur :</label>
+        <select id="editeurId" name="editeurId" required>
+            <option value="">-- Choisir un éditeur --</option>
+            <c:forEach var="editeur" items="${editeurs}">
+                <option value="${editeur.id}" ${livre != null && livre.editeur != null && livre.editeur.id == editeur.id ? 'selected' : ''}>
+                        ${editeur.nom}
+                </option>
+            </c:forEach>
+        </select>
+    </p>
+
+    <p>Auteurs :</p>
+    <c:forEach var="auteur" items="${auteurs}">
+        <p>
+            <label>
+                <input type="checkbox" name="auteurIds" value="${auteur.id}"
+                    <c:set var="auteurSelectionne" value="false"/>
+                    <c:if test="${livre != null && livre.auteurs != null}">
+                        <c:forEach var="auteurLivre" items="${livre.auteurs}">
+                            <c:if test="${auteurLivre.id == auteur.id}">
+                                <c:set var="auteurSelectionne" value="true"/>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${auteurSelectionne}">checked</c:if>
+                >
+                    ${auteur.prenom} ${auteur.nom}
+            </label>
+        </p>
+    </c:forEach>
+
+    <p>
         <button type="submit">Enregistrer</button>
     </p>
 </form>

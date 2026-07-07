@@ -44,7 +44,9 @@ public class LivreServlet extends HttpServlet {
                 break;
             case "new":
                 // Affiche le formulaire vide.
-                chargerListesFormulaire(request);
+                request.setAttribute("categories", categorieService.findAll());
+                request.setAttribute("editeurs", editeurService.findAll());
+                request.setAttribute("auteurs", auteurService.findAll());
                 request.getRequestDispatcher("/jsp/livres/formulaire.jsp").forward(request, response);
                 break;
             case "edit":
@@ -54,7 +56,9 @@ public class LivreServlet extends HttpServlet {
                     Livre livre = livreService.findById(id);
                     request.setAttribute("livre", livre);
                 }
-                chargerListesFormulaire(request);
+                request.setAttribute("categories", categorieService.findAll());
+                request.setAttribute("editeurs", editeurService.findAll());
+                request.setAttribute("auteurs", auteurService.findAll());
                 request.getRequestDispatcher("/jsp/livres/formulaire.jsp").forward(request, response);
                 break;
             default:
