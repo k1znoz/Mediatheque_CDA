@@ -4,9 +4,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>Liste des emprunts</title>
 </head>
 <body>
+
+<%@ include file="/jsp/includes/header.jspf" %>
+
+<div class="container">
 <h1>Liste des emprunts</h1>
 
 <!-- Lien vers le formulaire de creation -->
@@ -50,6 +55,8 @@
     </c:forEach>
     </tbody>
 </table>
+
+</div>
 
 </body>
 </html>

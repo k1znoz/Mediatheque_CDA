@@ -4,9 +4,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>Formulaire livre</title>
 </head>
 <body>
+
+<%@ include file="/jsp/includes/header.jspf" %>
+
+<div class="container">
 
 <c:choose>
     <c:when test="${livre == null}">
@@ -102,6 +107,8 @@
 <p>
     <a href="${pageContext.request.contextPath}/livres?action=list">Retour vers la liste</a>
 </p>
+
+</div>
 
 </body>
 </html>

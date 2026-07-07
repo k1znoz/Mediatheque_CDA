@@ -4,9 +4,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>Formulaire éditeurs</title>
 </head>
 <body>
+
+<%@ include file="/jsp/includes/header.jspf" %>
+
+<div class="container">
 
 <c:choose>
     <c:when test="${editeur == null}">
@@ -43,6 +48,8 @@
 <p>
     <a href="${pageContext.request.contextPath}/editeurs?action=list">Retour vers la liste</a>
 </p>
+
+</div>
 
 </body>
 </html>

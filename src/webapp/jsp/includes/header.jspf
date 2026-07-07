@@ -1,0 +1,18 @@
+<%-- Fragment commun de navigation pour la mediatheque --%>
+<div class="navbar">
+    <div class="container">
+        <h1>Gestion de Médiathèque</h1>
+
+        <nav>
+            <ul class="actions">
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/">Accueil</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/livres?action=list">Livres</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/auteurs?action=list">Auteurs</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/editeurs?action=list">Éditeurs</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/categories?action=list">Catégories</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/utilisateurs?action=list">Utilisateurs</a></li>
+                <li><a class="btn btn-secondary" href="${pageContext.request.contextPath}/emprunts?action=list">Emprunts</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
