@@ -85,11 +85,7 @@
                 <input type="checkbox" name="auteurIds" value="${auteur.id}"
                     <c:set var="auteurSelectionne" value="false"/>
                     <c:if test="${livre != null && livre.auteurs != null}">
-                        <c:forEach var="auteurLivre" items="${livre.auteurs}">
-                            <c:if test="${auteurLivre.id == auteur.id}">
-                                <c:set var="auteurSelectionne" value="true"/>
-                            </c:if>
-                        </c:forEach>
+
                     </c:if>
                     <c:if test="${auteurSelectionne}">checked</c:if>
                 >
