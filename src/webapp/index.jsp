@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<jsp:include page="/jsp/includes/header.jspf" />
+<%@ include file="/jsp/includes/header.jspf" %>
 
 <div class="container">
     <!-- Titre principal de la page d'accueil -->
