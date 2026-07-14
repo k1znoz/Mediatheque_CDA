@@ -38,7 +38,15 @@ public class LivreRepository {
         EntityManager em = JpaUtil.createEntityManager();
 
         try {
-            return em.find(Livre.class, id);
+            return em.createQuery(
+                            "SELECT DISTINCT l FROM Livre l " +
+                                    "LEFT JOIN FETCH l.auteurs " +
+                                    "WHERE l.id = :id",
+                            Livre.class)
+                    .setParameter("id", id)
+                    .getResultStream()
+                    .findFirst()
+                    .orElse(null);
         } finally {
             em.close();
         }

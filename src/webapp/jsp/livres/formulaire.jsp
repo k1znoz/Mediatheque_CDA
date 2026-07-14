@@ -71,28 +71,41 @@
         <select id="editeurId" name="editeurId" required>
             <option value="">-- Choisir un éditeur --</option>
             <c:forEach var="editeur" items="${editeurs}">
-                <option value="${editeur.id}" ${livre != null && livre.editeur != null && livre.editeur.id == editeur.id ? 'selected' : ''}>
-                        ${editeur.nom}
-                </option>
+                <c:choose>
+                    <c:when test="${livre != null && livre.editeur != null && livre.editeur.id == editeur.id}">
+                        <option value="${editeur.id}" selected>${editeur.nom}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${editeur.id}">${editeur.nom}</option>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </select>
     </p>
 
-    <p>Auteurs :</p>
-    <c:forEach var="auteur" items="${auteurs}">
-        <p>
-            <label>
-                <input type="checkbox" name="auteurIds" value="${auteur.id}"
-                    <c:set var="auteurSelectionne" value="false"/>
-                    <c:if test="${livre != null && livre.auteurs != null}">
-
-                    </c:if>
-                    <c:if test="${auteurSelectionne}">checked</c:if>
-                >
-                    ${auteur.prenom} ${auteur.nom}
-            </label>
-        </p>
-    </c:forEach>
+    <p>
+        <label for="auteurIds">Auteurs :</label>
+        <select id="auteurIds" name="auteurIds" multiple size="6" required>
+            <c:forEach var="auteur" items="${auteurs}">
+                <c:set var="auteurSelectionne" value="false"/>
+                <c:if test="${livre != null && livre.auteurs != null}">
+                    <c:forEach var="auteurLivre" items="${livre.auteurs}">
+                        <c:if test="${auteurLivre.id == auteur.id}">
+                            <c:set var="auteurSelectionne" value="true"/>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+                <c:choose>
+                    <c:when test="${auteurSelectionne}">
+                        <option value="${auteur.id}" selected>${auteur.prenom} ${auteur.nom}</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="${auteur.id}">${auteur.prenom} ${auteur.nom}</option>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </select>
+    </p>
 
     <p>
         <button type="submit">Enregistrer</button>
